@@ -1,0 +1,123 @@
+{
+    "common": {
+        "name": "sky-remote",
+        "version": "1.0.1",
+        "news": {
+            "1.0.0": {
+                "en": "Initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "Начальная версия",
+                "pt": "Lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial",
+                "pl": "Pierwsze wydanie",
+                "zh-cn": "首次出版"
+            }
+        },
+        "title": "Sky Remote",
+        "titleLang": {
+            "en": "Sky Remote",
+            "de": "Sky-Fernbedienung",
+            "ru": "Пульт от Sky",
+            "pt": "Controle remoto Sky",
+            "nl": "Sky-afstandsbediening",
+            "fr": "Télécommande Sky",
+            "it": "Telecomando Sky",
+            "es": "Control remoto de Sky",
+            "pl": "Pilot Sky",
+            "zh-cn": "天空遥控器"
+        },
+        "desc": {
+            "en": "Control Sky Q boxes via network commands",
+            "de": "Steuern Sie Sky Q-Boxen über Netzwerkbefehle",
+            "ru": "Управляйте приставками Sky Q через сетевые команды",
+            "pt": "Controlar caixas Sky Q através de comandos de rede",
+            "nl": "Bedien Sky Q-boxen via netwerkopdrachten",
+            "fr": "Contrôlez les boîtiers Sky Q via des commandes réseau",
+            "it": "Controlla i box Sky Q tramite comandi di rete",
+            "es": "Controle los decodificadores Sky Q a través de comandos de red",
+            "pl": "Steruj dekoderami Sky Q za pomocą poleceń sieciowych",
+            "zh-cn": "通过网络命令控制 Sky Q 机顶盒"
+        },
+        "authors": [
+            "Your Name <your.email@example.com>"
+        ],
+        "keywords": [
+            "Sky Q",
+            "Sky+",
+            "remote control",
+            "television"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "sky-remote.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/yourusername/iobroker.sky-remote/master/admin/sky-remote.png",
+        "readme": "https://github.com/yourusername/iobroker.sky-remote/blob/master/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "multimedia",
+        "compact": true,
+        "connectionType": "local",
+        "dataSource": "poll",
+        "materialize": true,
+        "dependencies": [
+            {
+                "js-controller": ">=3.3.0"
+            }
+        ]
+    },
+    "native": {
+        "host": "",
+        "port": 49160,
+        "connectionCheckFrequency": 60000
+    },
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "Connected to Sky box",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "buttons",
+            "type": "channel",
+            "common": {
+                "name": "Remote Buttons"
+            },
+            "native": {}
+        },
+        {
+            "_id": "sendSequence",
+            "type": "state",
+            "common": {
+                "name": "Send Command Sequence",
+                "type": "string",
+                "role": "text",
+                "read": true,
+                "write": true,
+                "desc": "Send a sequence of commands separated by comma (e.g. \"home,right,select\")"
+            },
+            "native": {}
+        }
+    ]
+}
