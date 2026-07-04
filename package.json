@@ -1,59 +1,59 @@
 {
-    "name": "iobroker.sky-remote",
-    "version": "1.0.1",
-    "description": "Control Sky Q boxes via network commands",
-    "author": {
-        "name": "Alan Paris",
-        "email": "alan.paris@scottish.rugby"
-    },
-    "homepage": "https://github.com/AlanSRU/ioBroker.sky-remote",
-    "license": "MIT",
-    "keywords": [
-        "ioBroker",
-        "smart home",
-        "home automation",
-        "Sky Q",
-        "Sky+",
-        "television",
-        "remote control"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/AlanSRU/ioBroker.sky-remote.git"
-    },
-    "engines": {
-        "node": ">=22"
-    },
-    "dependencies": {
-        "@iobroker/adapter-core": "^3.4.1",
-        "sky-remote": "^1.2.0"
-    },
-    "devDependencies": {
-        "@alcalzone/release-script": "^5.2.1",
-        "@alcalzone/release-script-plugin-iobroker": "^5.2.0",
-        "@alcalzone/release-script-plugin-license": "^5.2.0",
-        "@iobroker/adapter-dev": "^1.5.0",
-        "@iobroker/eslint-config": "^2.3.4",
-        "@iobroker/testing": "^5.2.2",
-        "@types/node": "^22"
-    },
-    "main": "main.js",
-    "files": [
-        "admin/",
-        "io-package.json",
-        "LICENSE",
-        "main.js"
-    ],
-    "scripts": {
-        "test": "mocha --exit",
-        "test:package": "mocha test/package --exit",
-        "test:integration": "mocha test/integration --exit",
-        "lint": "eslint .",
-        "translate": "translate-adapter",
-        "release": "release-script"
-    },
-    "bugs": {
-        "url": "https://github.com/AlanSRU/ioBroker.sky-remote/issues"
-    },
-    "readmeFilename": "README.md"
+  "name": "iobroker.sky-remote",
+  "version": "1.0.2",
+  "description": "Control Sky Q boxes via network commands",
+  "author": {
+    "name": "Alan Paris",
+    "email": "alan.paris@scottish.rugby"
+  },
+  "homepage": "https://github.com/AlanSRU/ioBroker.sky-remote",
+  "license": "MIT",
+  "keywords": [
+    "ioBroker",
+    "smart home",
+    "home automation",
+    "Sky Q",
+    "Sky+",
+    "television",
+    "remote control"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlanSRU/ioBroker.sky-remote.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@iobroker/adapter-core": "^3.4.1",
+    "sky-remote": "^1.2.0"
+  },
+  "devDependencies": {
+    "@alcalzone/release-script": "^5.2.1",
+    "@alcalzone/release-script-plugin-iobroker": "^5.2.0",
+    "@alcalzone/release-script-plugin-license": "^5.2.0",
+    "@iobroker/adapter-dev": "^1.5.0",
+    "@iobroker/eslint-config": "^2.3.4",
+    "@iobroker/testing": "^5.2.2",
+    "@types/node": "^22"
+  },
+  "main": "main.js",
+  "files": [
+    "admin/",
+    "io-package.json",
+    "LICENSE",
+    "main.js"
+  ],
+  "scripts": {
+    "test": "mocha --exit",
+    "test:package": "mocha test/package --exit",
+    "test:integration": "mocha test/integration --exit",
+    "lint": "eslint .",
+    "translate": "translate-adapter",
+    "release": "release-script"
+  },
+  "bugs": {
+    "url": "https://github.com/AlanSRU/ioBroker.sky-remote/issues"
+  },
+  "readmeFilename": "README.md"
 }

@@ -1,135 +1,148 @@
 {
-    "common": {
-        "name": "sky-remote",
-        "version": "1.0.1",
-        "news": {
-            "1.0.0": {
-                "en": "Initial release",
-                "de": "Erstveröffentlichung",
-                "ru": "Начальная версия",
-                "pt": "Lançamento inicial",
-                "nl": "Eerste uitgave",
-                "fr": "Première version",
-                "it": "Versione iniziale",
-                "es": "Versión inicial",
-                "pl": "Pierwsze wydanie",
-                "zh-cn": "首次出版",
-                "uk": "Початковий випуск"
-            }
-        },
-        "titleLang": {
-            "en": "Sky Remote",
-            "de": "Sky-Fernbedienung",
-            "ru": "Пульт от Sky",
-            "pt": "Controle remoto Sky",
-            "nl": "Sky-afstandsbediening",
-            "fr": "Télécommande Sky",
-            "it": "Telecomando Sky",
-            "es": "Control remoto de Sky",
-            "pl": "Pilot Sky",
-            "zh-cn": "天空遥控器",
-            "uk": "Sky Remote"
-        },
-        "desc": {
-            "en": "Control Sky Q boxes via network commands",
-            "de": "Steuern Sie Sky Q-Boxen über Netzwerkbefehle",
-            "ru": "Управляйте приставками Sky Q через сетевые команды",
-            "pt": "Controlar caixas Sky Q através de comandos de rede",
-            "nl": "Bedien Sky Q-boxen via netwerkopdrachten",
-            "fr": "Contrôlez les boîtiers Sky Q via des commandes réseau",
-            "it": "Controlla i box Sky Q tramite comandi di rete",
-            "es": "Controle los decodificadores Sky Q a través de comandos de red",
-            "pl": "Steruj dekoderami Sky Q za pomocą poleceń sieciowych",
-            "zh-cn": "通过网络命令控制 Sky Q 机顶盒",
-            "uk": "Керуйте Sky Q box через мережеві команди"
-        },
-        "authors": [
-            "Alan Paris <alan.paris@scottish.rugby>"
-        ],
-        "keywords": [
-            "Sky Q",
-            "Sky+",
-            "remote control",
-            "television"
-        ],
-        "licenseInformation": {
-            "license": "MIT",
-            "type": "free"
-        },
-        "platform": "Javascript/Node.js",
-        "icon": "sky-remote.png",
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/AlanSRU/ioBroker.sky-remote/main/admin/sky-remote.png",
-        "readme": "https://github.com/AlanSRU/ioBroker.sky-remote/blob/main/README.md",
-        "loglevel": "info",
-        "mode": "daemon",
-        "type": "multimedia",
-        "compact": true,
-        "connectionType": "local",
-        "dataSource": "poll",
-        "adminUI": {
-            "config": "json"
-        },
-        "tier": 3,
-        "dependencies": [
-            {
-                "js-controller": ">=6.0.11"
-            }
-        ],
-        "globalDependencies": [
-            {
-                "admin": ">=7.6.20"
-            }
-        ]
+  "common": {
+    "name": "sky-remote",
+    "version": "1.0.2",
+    "news": {
+      "1.0.2": {
+        "en": "Modernized adapter for community submission: jsonConfig admin UI, updated dependencies, CI/release tooling",
+        "de": "Modernisierter Adapter für Community-Einreichungen: jsonConfig-Admin-UI, aktualisierte Abhängigkeiten, CI-/Release-Tools",
+        "ru": "Модернизированный адаптер для отправки изменений сообществом: административный интерфейс jsonConfig, обновленные зависимости, инструменты CI/релизов.",
+        "pt": "Adaptador modernizado para submissão da comunidade: interface de administração jsonConfig, dependências atualizadas, ferramentas de CI/release.",
+        "nl": "Gemoderniseerde adapter voor community-inzendingen: jsonConfig-beheerinterface, bijgewerkte afhankelijkheden, CI/release-tools.",
+        "fr": "Adaptateur modernisé pour la soumission communautaire : interface d’administration jsonConfig, dépendances mises à jour, outils d’intégration continue et de déploiement.",
+        "it": "Adattatore modernizzato per l'invio di contenuti alla community: interfaccia utente di amministrazione jsonConfig, dipendenze aggiornate, strumenti di CI/rilascio.",
+        "es": "Adaptador modernizado para el envío de contribuciones de la comunidad: interfaz de administración de jsonConfig, dependencias actualizadas, herramientas de CI/lanzamiento.",
+        "pl": "Zmodernizowany adapter do przesyłania danych przez społeczność: interfejs użytkownika administratora jsonConfig, zaktualizowane zależności, narzędzia CI/release",
+        "uk": "Модернізований адаптер для надсилання матеріалів спільнотою: інтерфейс адміністратора jsonConfig, оновлені залежності, інструменти для неперервної інтеграції/релізу",
+        "zh-cn": "社区提交适配器已现代化：jsonConfig 管理界面、更新的依赖项、CI/发布工具"
+      },
+      "1.0.0": {
+        "en": "Initial release",
+        "de": "Erstveröffentlichung",
+        "ru": "Начальная версия",
+        "pt": "Lançamento inicial",
+        "nl": "Eerste uitgave",
+        "fr": "Première version",
+        "it": "Versione iniziale",
+        "es": "Versión inicial",
+        "pl": "Pierwsze wydanie",
+        "zh-cn": "首次出版",
+        "uk": "Початковий випуск"
+      }
     },
-    "native": {
-        "host": "",
-        "port": 49160,
-        "connectionCheckFrequency": 60000
+    "titleLang": {
+      "en": "Sky Remote",
+      "de": "Sky-Fernbedienung",
+      "ru": "Пульт от Sky",
+      "pt": "Controle remoto Sky",
+      "nl": "Sky-afstandsbediening",
+      "fr": "Télécommande Sky",
+      "it": "Telecomando Sky",
+      "es": "Control remoto de Sky",
+      "pl": "Pilot Sky",
+      "zh-cn": "天空遥控器",
+      "uk": "Sky Remote"
     },
-    "objects": [],
-    "instanceObjects": [
-        {
-            "_id": "info",
-            "type": "channel",
-            "common": {
-                "name": "Information"
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "role": "indicator.connected",
-                "name": "Connected to Sky box",
-                "type": "boolean",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {}
-        },
-        {
-            "_id": "buttons",
-            "type": "channel",
-            "common": {
-                "name": "Remote Buttons"
-            },
-            "native": {}
-        },
-        {
-            "_id": "sendSequence",
-            "type": "state",
-            "common": {
-                "name": "Send Command Sequence",
-                "type": "string",
-                "role": "text",
-                "read": true,
-                "write": true,
-                "desc": "Send a sequence of commands separated by comma (e.g. \"home,right,select\")"
-            },
-            "native": {}
-        }
+    "desc": {
+      "en": "Control Sky Q boxes via network commands",
+      "de": "Steuern Sie Sky Q-Boxen über Netzwerkbefehle",
+      "ru": "Управляйте приставками Sky Q через сетевые команды",
+      "pt": "Controlar caixas Sky Q através de comandos de rede",
+      "nl": "Bedien Sky Q-boxen via netwerkopdrachten",
+      "fr": "Contrôlez les boîtiers Sky Q via des commandes réseau",
+      "it": "Controlla i box Sky Q tramite comandi di rete",
+      "es": "Controle los decodificadores Sky Q a través de comandos de red",
+      "pl": "Steruj dekoderami Sky Q za pomocą poleceń sieciowych",
+      "zh-cn": "通过网络命令控制 Sky Q 机顶盒",
+      "uk": "Керуйте Sky Q box через мережеві команди"
+    },
+    "authors": [
+      "Alan Paris <alan.paris@scottish.rugby>"
+    ],
+    "keywords": [
+      "Sky Q",
+      "Sky+",
+      "remote control",
+      "television"
+    ],
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
+    },
+    "platform": "Javascript/Node.js",
+    "icon": "sky-remote.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/AlanSRU/ioBroker.sky-remote/main/admin/sky-remote.png",
+    "readme": "https://github.com/AlanSRU/ioBroker.sky-remote/blob/main/README.md",
+    "loglevel": "info",
+    "mode": "daemon",
+    "type": "multimedia",
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "poll",
+    "adminUI": {
+      "config": "json"
+    },
+    "tier": 3,
+    "dependencies": [
+      {
+        "js-controller": ">=6.0.11"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=7.6.20"
+      }
     ]
+  },
+  "native": {
+    "host": "",
+    "port": 49160,
+    "connectionCheckFrequency": 60000
+  },
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "Connected to Sky box",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "buttons",
+      "type": "channel",
+      "common": {
+        "name": "Remote Buttons"
+      },
+      "native": {}
+    },
+    {
+      "_id": "sendSequence",
+      "type": "state",
+      "common": {
+        "name": "Send Command Sequence",
+        "type": "string",
+        "role": "text",
+        "read": true,
+        "write": true,
+        "desc": "Send a sequence of commands separated by comma (e.g. \"home,right,select\")"
+      },
+      "native": {}
+    }
+  ]
 }
