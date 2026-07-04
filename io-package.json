@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "sky-remote",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "news": {
+      "1.0.4": {
+        "en": "Removed the abandoned `sky-remote` third-party dependency; the Sky Q / Sky+HD control protocol is now built in and modernized (node:net, Buffer.from, promise-based, no deprecated APIs)",
+        "de": "Die veraltete Drittanbieterabhängigkeit `sky-remote` wurde entfernt; das Sky Q / Sky+HD-Steuerungsprotokoll ist nun integriert und modernisiert (node:net, Buffer.from, Promise-basiert, keine veralteten APIs).",
+        "ru": "Удалена заброшенная сторонняя зависимость `sky-remote`; протокол управления Sky Q / Sky+HD теперь встроен и модернизирован (node:net, Buffer.from, основан на промисах, без устаревших API).",
+        "pt": "Removemos a dependência de terceiros `sky-remote`, que estava abandonada; o protocolo de controle do Sky Q / Sky+HD agora está integrado e modernizado (node:net, Buffer.from, baseado em promessas, sem APIs obsoletas).",
+        "nl": "De verouderde `sky-remote`-afhankelijkheid van derden is verwijderd; het Sky Q / Sky+HD-besturingsprotocol is nu ingebouwd en gemoderniseerd (node:net, Buffer.from, op promises gebaseerd, geen verouderde API's).",
+        "fr": "Suppression de la dépendance tierce abandonnée `sky-remote` ; le protocole de contrôle Sky Q / Sky+HD est désormais intégré et modernisé (node:net, Buffer.from, basé sur les promesses, sans API obsolètes).",
+        "it": "Rimossa la dipendenza di terze parti `sky-remote` ormai abbandonata; il protocollo di controllo Sky Q / Sky+HD è ora integrato e modernizzato (node:net, Buffer.from, basato su promise, senza API obsolete).",
+        "es": "Se eliminó la dependencia de terceros abandonada `sky-remote`; el protocolo de control Sky Q / Sky+HD ahora está integrado y modernizado (node:net, Buffer.from, basado en promesas, sin API obsoletas).",
+        "pl": "Usunięto porzuconą zależność od oprogramowania firm trzecich `sky-remote`; protokół sterowania Sky Q/Sky+HD jest teraz wbudowany i zmodernizowany (node:net, Buffer.from, oparty na obietnicach, brak przestarzałych interfejsów API)",
+        "uk": "Видалено занедбану залежність від стороннього розробника `sky-remote`; протокол керування Sky Q / Sky+HD тепер вбудований та модернізований (node:net, Buffer.from, на основі обіцянок, без застарілих API).",
+        "zh-cn": "移除了已弃用的第三方依赖项“sky-remote”；Sky Q / Sky+HD 控制协议现已内置并进行了现代化改造（node:net、Buffer.from、基于 Promise，无已弃用的 API）。"
+      },
       "1.0.3": {
         "en": "Verify automated release publishing via GitHub Actions trusted publishing (no functional changes)",
         "de": "Automatisierte Release-Veröffentlichung über vertrauenswürdige GitHub Actions-Veröffentlichung prüfen (keine funktionalen Änderungen)",
