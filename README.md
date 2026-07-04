@@ -132,6 +132,9 @@ setState('sky-remote.0.sendSequence', 'power,1,0,1');
 	Placeholder for the next version (at the beginning of the line):
 	### __WORK IN PROGRESS__
 -->
+### __WORK IN PROGRESS__
+- (Alan Paris) Removed the abandoned `sky-remote` third-party dependency; the Sky Q / Sky+HD control protocol is now built in and modernized (node:net, Buffer.from, promise-based, no deprecated APIs)
+
 ### 1.0.3 (2026-07-04)
 - (Alan Paris) Verify automated release publishing via GitHub Actions trusted publishing (no functional changes)
 

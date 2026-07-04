@@ -1,7 +1,10 @@
 'use strict';
 
 const utils = require('@iobroker/adapter-core');
-const SkyRemote = require('sky-remote');
+const skyRemote = require('./lib/sky-remote');
+
+// Delay between commands in a sequence so the Sky box registers each key press.
+const SEQUENCE_DELAY_MS = 500;
 
 class SkyRemoteAdapter extends utils.Adapter {
     /**
@@ -17,7 +20,6 @@ class SkyRemoteAdapter extends utils.Adapter {
         this.on('stateChange', this.onStateChange.bind(this));
         this.on('unload', this.onUnload.bind(this));
 
-        this.remoteControl = null;
         this.isConnected = false;
         this.connectionCheckInterval = null;
 
@@ -82,15 +84,7 @@ class SkyRemoteAdapter extends utils.Adapter {
             return;
         }
 
-        // Initialize Sky Remote
-        try {
-            this.remoteControl = new SkyRemote(this.host, this.port);
-            this.log.info(`Sky Remote initialized for ${this.host}:${this.port}`);
-        } catch (err) {
-            this.log.error(`Failed to initialize Sky Remote: ${err.message}`);
-            this.setState('info.connection', false, true);
-            return;
-        }
+        this.log.info(`Sky Remote target set to ${this.host}:${this.port}`);
 
         // Create button states
         await this.createButtonStates();
@@ -225,6 +219,27 @@ class SkyRemoteAdapter extends utils.Adapter {
     }
 
     /**
+     * Send one or more remote commands to the Sky box, spaced out so the box
+     * registers each key press.
+     *
+     * @param {string | string[]} sequence single command, comma-separated string, or array of commands
+     * @returns {Promise<void>}
+     */
+    async press(sequence) {
+        const commands = (Array.isArray(sequence) ? sequence : String(sequence).split(','))
+            .map(cmd => cmd.trim())
+            .filter(cmd => cmd.length);
+
+        for (let i = 0; i < commands.length; i++) {
+            await skyRemote.sendCommand(this.host, this.port, commands[i]);
+            // brief gap between commands in a sequence
+            if (i < commands.length - 1) {
+                await this.delay(SEQUENCE_DELAY_MS);
+            }
+        }
+    }
+
+    /**
      * Is called if a subscribed state changes
      *
      * @param {string} id
@@ -238,6 +253,11 @@ class SkyRemoteAdapter extends utils.Adapter {
 
         this.log.info(`State change: ${id} = ${state.val} (ack: ${state.ack})`);
 
+        if (!this.host) {
+            this.log.error('No Sky box IP address configured');
+            return;
+        }
+
         // Extract command from ID
         const idParts = id.split('.');
         const command = idParts[idParts.length - 1];
@@ -247,54 +267,35 @@ class SkyRemoteAdapter extends utils.Adapter {
         if (stateType === 'buttons' && state.val === true) {
             this.log.info(`Button press: ${command}`);
 
-            if (!this.remoteControl) {
-                this.log.error('Sky remote not initialized');
-                this.setForeignState(id, false, true);
-                return;
-            }
-
-            // Send command to Sky box
-            this.remoteControl.press(command, err => {
-                if (err) {
-                    this.log.error(`Error sending command: ${err.message}`);
-                    this.setState('info.connection', false, true);
-                } else {
+            this.press(command)
+                .then(() => {
                     this.log.debug(`Command sent successfully: ${command}`);
                     this.setState('info.connection', true, true);
-                }
-
-                // Reset button state with ack after a short delay
-                this.setTimeout(() => {
-                    this.log.info(`Resetting button state: ${id}`);
-                    this.setForeignState(id, false, true);
-                }, 200);
-            });
+                })
+                .catch(err => {
+                    this.log.error(`Error sending command: ${err.message}`);
+                    this.setState('info.connection', false, true);
+                })
+                .finally(() => {
+                    // Reset button state with ack after a short delay
+                    this.setTimeout(() => {
+                        this.log.info(`Resetting button state: ${id}`);
+                        this.setForeignState(id, false, true);
+                    }, 200);
+                });
         } else if (id.endsWith('sendSequence') && typeof state.val === 'string' && state.val) {
             // Handle sequence
-            // Parse sequence into array of commands
-            const sequence = state.val.split(',').map(cmd => cmd.trim());
+            this.log.info(`Sending sequence: ${state.val}`);
 
-            if (sequence.length === 0) {
-                return;
-            }
-
-            this.log.info(`Sending sequence: ${sequence.join(', ')}`);
-
-            if (!this.remoteControl) {
-                this.log.error('Sky remote not initialized');
-                return;
-            }
-
-            // Send command sequence
-            this.remoteControl.press(sequence, err => {
-                if (err) {
-                    this.log.error(`Error sending sequence: ${err.message}`);
-                    this.setState('info.connection', false, true);
-                } else {
+            this.press(state.val)
+                .then(() => {
                     this.log.debug('Sequence sent successfully');
                     this.setState('info.connection', true, true);
-                }
-            });
+                })
+                .catch(err => {
+                    this.log.error(`Error sending sequence: ${err.message}`);
+                    this.setState('info.connection', false, true);
+                });
         }
     }
 
@@ -311,8 +312,6 @@ class SkyRemoteAdapter extends utils.Adapter {
                 this.connectionCheckInterval = null;
             }
 
-            // Clean up
-            this.remoteControl = null;
             this.log.info('Sky Remote adapter stopped');
 
             callback();

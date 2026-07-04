@@ -25,8 +25,7 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^3.4.1",
-    "sky-remote": "^1.2.0"
+    "@iobroker/adapter-core": "^3.4.1"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^5.2.1",
@@ -40,6 +39,7 @@
   "main": "main.js",
   "files": [
     "admin/",
+    "lib/",
     "io-package.json",
     "LICENSE",
     "main.js"
