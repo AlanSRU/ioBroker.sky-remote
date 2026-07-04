@@ -28,19 +28,6 @@
         "pl": "Zmodernizowany adapter do przesyłania danych przez społeczność: interfejs użytkownika administratora jsonConfig, zaktualizowane zależności, narzędzia CI/release",
         "uk": "Модернізований адаптер для надсилання матеріалів спільнотою: інтерфейс адміністратора jsonConfig, оновлені залежності, інструменти для неперервної інтеграції/релізу",
         "zh-cn": "社区提交适配器已现代化：jsonConfig 管理界面、更新的依赖项、CI/发布工具"
-      },
-      "1.0.0": {
-        "en": "Initial release",
-        "de": "Erstveröffentlichung",
-        "ru": "Начальная версия",
-        "pt": "Lançamento inicial",
-        "nl": "Eerste uitgave",
-        "fr": "Première version",
-        "it": "Versione iniziale",
-        "es": "Versión inicial",
-        "pl": "Pierwsze wydanie",
-        "zh-cn": "首次出版",
-        "uk": "Початковий випуск"
       }
     },
     "titleLang": {
