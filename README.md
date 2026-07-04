@@ -7,7 +7,7 @@
 ![Number of Installations](https://iobroker.live/badges/sky-remote-installed.svg)
 ![Current version in stable repository](https://iobroker.live/badges/sky-remote-stable.svg)
 
-**Tests:** ![Test and Release](https://github.com/AlanSRU/iobroker.sky-remote/workflows/Test%20and%20Release/badge.svg)
+**Tests:** ![Test and Release](https://github.com/AlanSRU/ioBroker.sky-remote/workflows/Test%20and%20Release/badge.svg)
 
 ## Sky Remote Adapter for ioBroker
 
