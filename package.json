@@ -1,6 +1,6 @@
 {
   "name": "iobroker.sky-remote",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Control Sky Q boxes via network commands",
   "author": {
     "name": "Alan Paris",

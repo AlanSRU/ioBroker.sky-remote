@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "sky-remote",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "news": {
+      "1.0.3": {
+        "en": "Verify automated release publishing via GitHub Actions trusted publishing (no functional changes)",
+        "de": "Automatisierte Release-Veröffentlichung über vertrauenswürdige GitHub Actions-Veröffentlichung prüfen (keine funktionalen Änderungen)",
+        "ru": "Проверьте автоматическую публикацию релиза через GitHub Actions с использованием функции доверенной публикации (без функциональных изменений).",
+        "pt": "Verificar publicação automatizada de versões via publicação confiável do GitHub Actions (sem alterações funcionais)",
+        "nl": "Controleer of de geautomatiseerde publicatie van releases via GitHub Actions Trusted Publishing is voltooid (geen functionele wijzigingen).",
+        "fr": "Vérification de la publication automatisée des versions via la publication de confiance GitHub Actions (aucune modification fonctionnelle)",
+        "it": "Verifica la pubblicazione automatizzata del rilascio tramite la pubblicazione attendibile di GitHub Actions (nessuna modifica funzionale).",
+        "es": "Verificar la publicación automatizada de versiones mediante la publicación segura de GitHub Actions (sin cambios funcionales).",
+        "pl": "Zweryfikuj automatyczne publikowanie wydań za pośrednictwem zaufanego publikowania GitHub Actions (bez zmian funkcjonalnych)",
+        "uk": "Перевірка автоматичної публікації релізів через GitHub Actions для довіреної публікації (без функціональних змін)",
+        "zh-cn": "验证通过 GitHub Actions 可信发布功能自动发布版本（无功能性更改）"
+      },
       "1.0.2": {
         "en": "Modernized adapter for community submission: jsonConfig admin UI, updated dependencies, CI/release tooling",
         "de": "Modernisierter Adapter für Community-Einreichungen: jsonConfig-Admin-UI, aktualisierte Abhängigkeiten, CI-/Release-Tools",

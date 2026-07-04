@@ -132,7 +132,7 @@ setState('sky-remote.0.sendSequence', 'power,1,0,1');
 	Placeholder for the next version (at the beginning of the line):
 	### __WORK IN PROGRESS__
 -->
-### __WORK IN PROGRESS__
+### 1.0.3 (2026-07-04)
 - (Alan Paris) Verify automated release publishing via GitHub Actions trusted publishing (no functional changes)
 
 ### 1.0.2 (2026-07-04)
