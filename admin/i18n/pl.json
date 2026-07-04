@@ -1,0 +1,9 @@
+{
+    "Connection Check Frequency (ms)": "Częstotliwość sprawdzania połączenia (ms)",
+    "How often to check if the Sky box is online (in milliseconds)": "Jak często sprawdzać, czy Sky Box jest online (w milisekundach)",
+    "IP Address or Hostname": "Adres IP lub nazwa hosta",
+    "IP address of your Sky Q box": "Adres IP Twojego urządzenia Sky Q Box",
+    "Port": "Port",
+    "Sky Box Settings": "Ustawienia Sky Boxa",
+    "Usually 49160 for Sky Q boxes": "Zwykle 49160 dla skrzynek Sky Q"
+}

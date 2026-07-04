@@ -1,0 +1,9 @@
+{
+    "Connection Check Frequency (ms)": "Частота проверки соединения (мс)",
+    "How often to check if the Sky box is online (in milliseconds)": "Как часто проверять, включен ли Skybox (в миллисекундах)",
+    "IP Address or Hostname": "IP-адрес или имя хоста",
+    "IP address of your Sky Q box": "IP-адрес вашего Sky Q box",
+    "Port": "Порт",
+    "Sky Box Settings": "Настройки Скайбокса",
+    "Usually 49160 for Sky Q boxes": "Обычно 49160 для коробок Sky Q."
+}

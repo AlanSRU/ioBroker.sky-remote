@@ -1,0 +1,9 @@
+{
+    "Connection Check Frequency (ms)": "Verbindingscontrolefrequentie (ms)",
+    "How often to check if the Sky box is online (in milliseconds)": "Hoe vaak controleren of de Skybox online is (in milliseconden)",
+    "IP Address or Hostname": "IP-adres of hostnaam",
+    "IP address of your Sky Q box": "IP-adres van uw Sky Q-box",
+    "Port": "Haven",
+    "Sky Box Settings": "Sky Box-instellingen",
+    "Usually 49160 for Sky Q boxes": "Meestal 49160 voor Sky Q-boxen"
+}

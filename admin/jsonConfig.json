@@ -1,0 +1,55 @@
+{
+    "i18n": true,
+    "type": "panel",
+    "items": {
+        "_header": {
+            "type": "header",
+            "text": "Sky Box Settings",
+            "size": 5,
+            "newLine": true,
+            "xs": 12,
+            "sm": 12,
+            "md": 12,
+            "lg": 12,
+            "xl": 12
+        },
+        "host": {
+            "type": "text",
+            "label": "IP Address or Hostname",
+            "placeholder": "192.168.0.100",
+            "help": "IP address of your Sky Q box",
+            "newLine": true,
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 6,
+            "xl": 6
+        },
+        "port": {
+            "type": "number",
+            "label": "Port",
+            "min": 1,
+            "max": 65535,
+            "help": "Usually 49160 for Sky Q boxes",
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 6,
+            "xl": 6
+        },
+        "connectionCheckFrequency": {
+            "type": "number",
+            "label": "Connection Check Frequency (ms)",
+            "min": 5000,
+            "max": 300000,
+            "step": 1000,
+            "help": "How often to check if the Sky box is online (in milliseconds)",
+            "newLine": true,
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 6,
+            "xl": 6
+        }
+    }
+}

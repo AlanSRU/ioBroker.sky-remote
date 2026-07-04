@@ -13,10 +13,10 @@
                 "it": "Versione iniziale",
                 "es": "Versión inicial",
                 "pl": "Pierwsze wydanie",
-                "zh-cn": "首次出版"
+                "zh-cn": "首次出版",
+                "uk": "Початковий випуск"
             }
         },
-        "title": "Sky Remote",
         "titleLang": {
             "en": "Sky Remote",
             "de": "Sky-Fernbedienung",
@@ -27,7 +27,8 @@
             "it": "Telecomando Sky",
             "es": "Control remoto de Sky",
             "pl": "Pilot Sky",
-            "zh-cn": "天空遥控器"
+            "zh-cn": "天空遥控器",
+            "uk": "Sky Remote"
         },
         "desc": {
             "en": "Control Sky Q boxes via network commands",
@@ -39,10 +40,11 @@
             "it": "Controlla i box Sky Q tramite comandi di rete",
             "es": "Controle los decodificadores Sky Q a través de comandos de red",
             "pl": "Steruj dekoderami Sky Q za pomocą poleceń sieciowych",
-            "zh-cn": "通过网络命令控制 Sky Q 机顶盒"
+            "zh-cn": "通过网络命令控制 Sky Q 机顶盒",
+            "uk": "Керуйте Sky Q box через мережеві команди"
         },
         "authors": [
-            "Your Name <your.email@example.com>"
+            "Alan Paris <alan.paris@scottish.rugby>"
         ],
         "keywords": [
             "Sky Q",
@@ -50,23 +52,33 @@
             "remote control",
             "television"
         ],
-        "license": "MIT",
+        "licenseInformation": {
+            "license": "MIT",
+            "type": "free"
+        },
         "platform": "Javascript/Node.js",
-        "main": "main.js",
         "icon": "sky-remote.png",
         "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/yourusername/iobroker.sky-remote/master/admin/sky-remote.png",
-        "readme": "https://github.com/yourusername/iobroker.sky-remote/blob/master/README.md",
+        "extIcon": "https://raw.githubusercontent.com/AlanSRU/iobroker.sky-remote/main/admin/sky-remote.png",
+        "readme": "https://github.com/AlanSRU/iobroker.sky-remote/blob/main/README.md",
         "loglevel": "info",
         "mode": "daemon",
         "type": "multimedia",
         "compact": true,
         "connectionType": "local",
         "dataSource": "poll",
-        "materialize": true,
+        "adminUI": {
+            "config": "json"
+        },
+        "tier": 3,
         "dependencies": [
             {
-                "js-controller": ">=3.3.0"
+                "js-controller": ">=6.0.11"
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": ">=7.6.20"
             }
         ]
     },

@@ -1,0 +1,9 @@
+{
+    "Connection Check Frequency (ms)": "连接检查频率（毫秒）",
+    "How often to check if the Sky box is online (in milliseconds)": "检查天空盒是否在线的频率（以毫秒为单位）",
+    "IP Address or Hostname": "IP 地址或主机名",
+    "IP address of your Sky Q box": "Sky Q 盒子的 IP 地址",
+    "Port": "港口",
+    "Sky Box Settings": "天空盒设置",
+    "Usually 49160 for Sky Q boxes": "Sky Q 盒子通常为 49160"
+}

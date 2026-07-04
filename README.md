@@ -4,8 +4,10 @@
 
 [![NPM version](https://img.shields.io/npm/v/iobroker.sky-remote.svg)](https://www.npmjs.com/package/iobroker.sky-remote)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.sky-remote.svg)](https://www.npmjs.com/package/iobroker.sky-remote)
-[![Dependency Status](https://img.shields.io/david/yourusername/iobroker.sky-remote.svg)](https://david-dm.org/yourusername/iobroker.sky-remote)
-[![Known Vulnerabilities](https://snyk.io/test/github/yourusername/ioBroker.sky-remote/badge.svg)](https://snyk.io/test/github/yourusername/ioBroker.sky-remote)
+![Number of Installations](https://iobroker.live/badges/sky-remote-installed.svg)
+![Current version in stable repository](https://iobroker.live/badges/sky-remote-stable.svg)
+
+**Tests:** ![Test and Release](https://github.com/AlanSRU/iobroker.sky-remote/workflows/Test%20and%20Release/badge.svg)
 
 ## Sky Remote Adapter for ioBroker
 
@@ -126,14 +128,21 @@ setState('sky-remote.0.sendSequence', 'power,1,0,1');
 
 ## Changelog
 
-### 1.0.0
-* Initial release
+<!--
+	Placeholder for the next version (at the beginning of the line):
+	### __WORK IN PROGRESS__
+-->
+### __WORK IN PROGRESS__
+- (Alan Paris) Modernized adapter for community submission: jsonConfig admin UI, updated dependencies, CI/release tooling
+
+### 1.0.0 (2025-05-05)
+- (Alan Paris) Initial release
 
 ## License
 
 MIT License
 
-Copyright (c) 2025 Your Name
+Copyright (c) 2026 Alan Paris <alan.paris@scottish.rugby>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
