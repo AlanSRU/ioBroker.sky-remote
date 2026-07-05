@@ -39,3 +39,6 @@ iobroker-data/
 
 # Local development notes (not part of the repo)
 CLAUDE.md
+
+# Local pre-submission review aids (copied from ioBroker.repositories)
+.review/
