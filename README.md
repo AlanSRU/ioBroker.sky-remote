@@ -15,6 +15,8 @@ Control Sky Q boxes via network commands
 
 This adapter allows you to send remote control commands to Sky Q boxes over your network. It provides states for all remote buttons and allows you to send command sequences.
 
+[Sky Q](https://www.sky.com/tv/boxes) is a set-top box from [Sky](https://www.sky.com/).
+
 ## Prerequisites
 
 - ioBroker installation
@@ -99,6 +101,10 @@ The adapter creates the following states:
 | boxoffice | Box Office button |
 | sky | Sky button |
 
+The following aliases are also accepted in `sendSequence` (they map to the same
+commands as the buttons above, so no separate button state is created):
+`dismiss` (= backup), `sidebar` (= interactive), `search` (= services).
+
 ## Integrating with Blockly
 
 You can use the Blockly visual programming interface in ioBroker to create sequences of commands:
@@ -132,6 +138,12 @@ setState('sky-remote.0.sendSequence', 'power,1,0,1');
 	Placeholder for the next version (at the beginning of the line):
 	### __WORK IN PROGRESS__
 -->
+### __WORK IN PROGRESS__
+- (Alan Paris) Reset own button states via setState instead of setForeignState
+- (Alan Paris) Validate and clamp the port and connection-check-frequency config in code (not only in the admin UI)
+- (Alan Paris) Add a default value to the sendSequence state and more descriptive button names
+- (Alan Paris) Document the sendSequence command aliases and add a Sky product link to the README
+
 ### 1.0.4 (2026-07-04)
 - (Alan Paris) Removed the abandoned `sky-remote` third-party dependency; the Sky Q / Sky+HD control protocol is now built in and modernized (node:net, Buffer.from, promise-based, no deprecated APIs)
 

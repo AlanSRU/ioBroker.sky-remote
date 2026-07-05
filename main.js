@@ -6,6 +6,38 @@ const skyRemote = require('./lib/sky-remote');
 // Delay between commands in a sequence so the Sky box registers each key press.
 const SEQUENCE_DELAY_MS = 500;
 
+// Human-friendly labels for the button states (falls back to the raw command name).
+const BUTTON_LABELS = {
+    power: 'Power',
+    tvguide: 'TV Guide',
+    boxoffice: 'Box Office',
+    services: 'Services',
+    interactive: 'Interactive',
+    help: 'Help',
+    up: 'Up',
+    down: 'Down',
+    left: 'Left',
+    right: 'Right',
+    select: 'Select / OK',
+    backup: 'Back',
+    text: 'Text',
+    i: 'Info',
+    red: 'Red',
+    green: 'Green',
+    yellow: 'Yellow',
+    blue: 'Blue',
+    play: 'Play',
+    pause: 'Pause',
+    stop: 'Stop',
+    rewind: 'Rewind',
+    fastforward: 'Fast Forward',
+    record: 'Record',
+    channelup: 'Channel Up',
+    channeldown: 'Channel Down',
+    home: 'Home',
+    sky: 'Sky',
+};
+
 class SkyRemoteAdapter extends utils.Adapter {
     /**
      * @param {Partial<utils.AdapterOptions>} [options]
@@ -72,10 +104,13 @@ class SkyRemoteAdapter extends utils.Adapter {
     async onReady() {
         this.log.info('Starting adapter...');
 
-        // Get config values
+        // Get config values (validate/clamp — the admin UI limits are not enforced
+        // for values set via CLI or by editing the config directly)
         this.host = this.config.host || '';
-        this.port = this.config.port || 49160;
-        this.connectionCheckFrequency = this.config.connectionCheckFrequency || 60000;
+        const port = parseInt(this.config.port, 10);
+        this.port = port >= 1 && port <= 65535 ? port : 49160;
+        const freq = parseInt(this.config.connectionCheckFrequency, 10) || 60000;
+        this.connectionCheckFrequency = Math.min(300000, Math.max(5000, freq));
 
         // Check if host is configured
         if (!this.host) {
@@ -121,7 +156,7 @@ class SkyRemoteAdapter extends utils.Adapter {
             await this.setObjectNotExistsAsync(`buttons.${button}`, {
                 type: 'state',
                 common: {
-                    name: `Sky ${button}`,
+                    name: `Sky ${BUTTON_LABELS[button] || button}`,
                     type: 'boolean',
                     role: 'button',
                     read: true,
@@ -144,6 +179,7 @@ class SkyRemoteAdapter extends utils.Adapter {
                 role: 'text',
                 read: true,
                 write: true,
+                def: '',
                 desc: 'Send a sequence of commands separated by comma (e.g. "home,right,select")',
             },
             native: {},
@@ -277,10 +313,10 @@ class SkyRemoteAdapter extends utils.Adapter {
                     this.setState('info.connection', false, true);
                 })
                 .finally(() => {
-                    // Reset button state with ack after a short delay
+                    // Reset our own button state with ack after a short delay
                     this.setTimeout(() => {
-                        this.log.info(`Resetting button state: ${id}`);
-                        this.setForeignState(id, false, true);
+                        this.log.debug(`Resetting button state: buttons.${command}`);
+                        this.setState(`buttons.${command}`, false, true);
                     }, 200);
                 });
         } else if (id.endsWith('sendSequence') && typeof state.val === 'string' && state.val) {

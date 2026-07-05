@@ -153,6 +153,7 @@
         "role": "text",
         "read": true,
         "write": true,
+        "def": "",
         "desc": "Send a sequence of commands separated by comma (e.g. \"home,right,select\")"
       },
       "native": {}
