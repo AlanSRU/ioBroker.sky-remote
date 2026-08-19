@@ -52,8 +52,10 @@ class SkyRemoteAdapter extends utils.Adapter {
         this.on('stateChange', this.onStateChange.bind(this));
         this.on('unload', this.onUnload.bind(this));
 
-        this.isConnected = false;
+        this.isConnected = null;
         this.connectionCheckInterval = null;
+        this.checkSocket = null;
+        this.unloaded = false;
 
         // All supported Sky Remote button commands
         this.buttons = [
@@ -106,20 +108,21 @@ class SkyRemoteAdapter extends utils.Adapter {
 
         // Get config values (validate/clamp — the admin UI limits are not enforced
         // for values set via CLI or by editing the config directly)
-        this.host = this.config.host || '';
+        // Deliberately not this.host — the Adapter base class owns that (the ioBroker host name)
+        this.skyHost = this.config.host || '';
         const port = parseInt(this.config.port, 10);
         this.port = port >= 1 && port <= 65535 ? port : 49160;
         const freq = parseInt(this.config.connectionCheckFrequency, 10) || 60000;
         this.connectionCheckFrequency = Math.min(300000, Math.max(5000, freq));
 
         // Check if host is configured
-        if (!this.host) {
+        if (!this.skyHost) {
             this.log.error('No Sky box IP address configured');
-            this.setState('info.connection', false, true);
+            this.setConnected(false);
             return;
         }
 
-        this.log.info(`Sky Remote target set to ${this.host}:${this.port}`);
+        this.log.info(`Sky Remote target set to ${this.skyHost}:${this.port}`);
 
         // Create button states
         await this.createButtonStates();
@@ -186,32 +189,45 @@ class SkyRemoteAdapter extends utils.Adapter {
     }
 
     /**
+     * Update info.connection, keeping the cached flag and the state in step.
+     * Every writer must go through here — a direct setState would desync the cache
+     * and latch the state at a stale value.
+     *
+     * @param {boolean} connected
+     */
+    setConnected(connected) {
+        if (this.unloaded || this.isConnected === connected) {
+            return;
+        }
+
+        this.isConnected = connected;
+        this.setState('info.connection', connected, true);
+        this.log.info(`Connection status changed to: ${connected ? 'connected' : 'disconnected'}`);
+    }
+
+    /**
      * Check connection to Sky box using TCP connection only
      * This doesn't send a command to avoid triggering on-screen display
      */
     checkConnection() {
-        if (!this.host || !this.port) {
-            this.setState('info.connection', false, true);
+        if (!this.skyHost || !this.port) {
+            this.setConnected(false);
             return;
         }
 
         // Use direct TCP socket connection to check if port is open
         const net = require('node:net');
         const socket = new net.Socket();
+        this.checkSocket = socket;
 
         // Set timeout to avoid hanging
         socket.setTimeout(2000);
 
         // Connection successful
         socket.on('connect', () => {
-            this.log.debug(`TCP connection to ${this.host}:${this.port} successful`);
+            this.log.debug(`TCP connection to ${this.skyHost}:${this.port} successful`);
 
-            // Only update if changed
-            if (!this.isConnected) {
-                this.isConnected = true;
-                this.setState('info.connection', true, true);
-                this.log.info(`Connection status changed to: connected`);
-            }
+            this.setConnected(true);
 
             // Close the socket properly
             socket.end();
@@ -222,12 +238,7 @@ class SkyRemoteAdapter extends utils.Adapter {
         socket.on('error', err => {
             this.log.debug(`TCP connection failed: ${err.message}`);
 
-            // Only update if changed
-            if (this.isConnected) {
-                this.isConnected = false;
-                this.setState('info.connection', false, true);
-                this.log.info(`Connection status changed to: disconnected`);
-            }
+            this.setConnected(false);
 
             // Ensure socket is destroyed
             socket.destroy();
@@ -237,20 +248,15 @@ class SkyRemoteAdapter extends utils.Adapter {
         socket.on('timeout', () => {
             this.log.debug(`TCP connection timed out`);
 
-            // Only update if changed
-            if (this.isConnected) {
-                this.isConnected = false;
-                this.setState('info.connection', false, true);
-                this.log.info(`Connection status changed to: disconnected (timeout)`);
-            }
+            this.setConnected(false);
 
             // Ensure socket is destroyed
             socket.destroy();
         });
 
         // Attempt connection
-        this.log.debug(`Checking TCP connection to ${this.host}:${this.port}`);
-        socket.connect(this.port, this.host);
+        this.log.debug(`Checking TCP connection to ${this.skyHost}:${this.port}`);
+        socket.connect(this.port, this.skyHost);
     }
 
     /**
@@ -266,7 +272,7 @@ class SkyRemoteAdapter extends utils.Adapter {
             .filter(cmd => cmd.length);
 
         for (let i = 0; i < commands.length; i++) {
-            await skyRemote.sendCommand(this.host, this.port, commands[i]);
+            await skyRemote.sendCommand(this.skyHost, this.port, commands[i]);
             // brief gap between commands in a sequence
             if (i < commands.length - 1) {
                 await this.delay(SEQUENCE_DELAY_MS);
@@ -288,7 +294,7 @@ class SkyRemoteAdapter extends utils.Adapter {
 
         this.log.info(`State change: ${id} = ${state.val} (ack: ${state.ack})`);
 
-        if (!this.host) {
+        if (!this.skyHost) {
             this.log.error('No Sky box IP address configured');
             return;
         }
@@ -305,11 +311,13 @@ class SkyRemoteAdapter extends utils.Adapter {
             this.press(command)
                 .then(() => {
                     this.log.debug(`Command sent successfully: ${command}`);
-                    this.setState('info.connection', true, true);
+                    this.setConnected(true);
                 })
                 .catch(err => {
                     this.log.error(`Error sending command: ${err.message}`);
-                    this.setState('info.connection', false, true);
+                    if (err.name !== 'EUNKNOWNCOMMAND') {
+                        this.setConnected(false);
+                    }
                 });
         } else if (id.endsWith('sendSequence') && typeof state.val === 'string' && state.val) {
             // Handle sequence
@@ -318,11 +326,13 @@ class SkyRemoteAdapter extends utils.Adapter {
             this.press(state.val)
                 .then(() => {
                     this.log.debug('Sequence sent successfully');
-                    this.setState('info.connection', true, true);
+                    this.setConnected(true);
                 })
                 .catch(err => {
                     this.log.error(`Error sending sequence: ${err.message}`);
-                    this.setState('info.connection', false, true);
+                    if (err.name !== 'EUNKNOWNCOMMAND') {
+                        this.setConnected(false);
+                    }
                 });
         }
     }
@@ -334,10 +344,19 @@ class SkyRemoteAdapter extends utils.Adapter {
      */
     onUnload(callback) {
         try {
+            // Set first: stops any in-flight socket callback writing state after teardown
+            this.unloaded = true;
+
             // Clear connection check interval
             if (this.connectionCheckInterval) {
                 this.clearInterval(this.connectionCheckInterval);
                 this.connectionCheckInterval = null;
+            }
+
+            // Drop an in-flight connection check
+            if (this.checkSocket) {
+                this.checkSocket.destroy();
+                this.checkSocket = null;
             }
 
             this.log.info('Sky Remote adapter stopped');

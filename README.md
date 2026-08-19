@@ -46,12 +46,14 @@ You can use this state in your visualizations or scripts to monitor the status o
 
 ### Button Behavior
 
-The adapter provides buttons that work as momentary push buttons. When you press a button:
-1. The button state changes to `true`
+The adapter provides buttons that work as momentary push buttons. They are write-only and carry
+no readable value, so a button is triggered purely by writing `true` to it:
+1. You write `true` to a `buttons.*` state
 2. The command is sent to the Sky Q box
-3. The button state automatically resets to `false`
 
-This allows you to press the same button multiple times in succession, which is essential for entering channel numbers (e.g., pressing 1, 0, 2 for channel 102).
+Writing `true` again always re-triggers the command, even if the state already holds `true`. This
+allows you to press the same button multiple times in succession, which is essential for entering
+channel numbers (e.g., pressing 1, 0, 2 for channel 102).
 
 ## Usage
 
@@ -140,6 +142,12 @@ setState('sky-remote.0.sendSequence', 'power,1,0,1');
 -->
 ### __WORK IN PROGRESS__
 - (Alan Paris) Button states are now write-only (`read: false`) as required for the `button` role; existing installations are migrated on start
+- (Alan Paris) Fixed info.connection latching at a stale value after a failed or successful command; all writers now share one code path
+- (Alan Paris) An unknown command name in sendSequence no longer marks a reachable box as offline
+- (Alan Paris) Stop writing states and drop the in-flight connection check when the instance is unloaded
+- (Alan Paris) Stopped shadowing the adapter base class `host` property, which misrouted js-controller crash notifications
+- (Alan Paris) A command now fails with an error instead of hanging silently when the Sky box closes the connection mid-command
+- (Alan Paris) Corrected the German, Dutch and Chinese admin translations of "Port", which used the harbour sense of the word
 
 ### 1.0.5 (2026-07-05)
 - (Alan Paris) Reset own button states via setState instead of setForeignState
