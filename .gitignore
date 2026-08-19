@@ -42,3 +42,7 @@ CLAUDE.md
 
 # Local pre-submission review aids (copied from ioBroker.repositories)
 .review/
+
+
+# ioBroker dev-server
+.dev-server/
