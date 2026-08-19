@@ -140,7 +140,7 @@ setState('sky-remote.0.sendSequence', 'power,1,0,1');
 	Placeholder for the next version (at the beginning of the line):
 	### __WORK IN PROGRESS__
 -->
-### __WORK IN PROGRESS__
+### 1.0.6 (2026-08-19)
 - (Alan Paris) Button states are now write-only (`read: false`) as required for the `button` role; existing installations are migrated on start
 - (Alan Paris) Fixed info.connection latching at a stale value after a failed or successful command; all writers now share one code path
 - (Alan Paris) An unknown command name in sendSequence no longer marks a reachable box as offline
