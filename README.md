@@ -167,6 +167,8 @@ setState('sky-remote.0.sendSequence', 'power,1,0,1');
 ### 1.0.0 (2025-05-05)
 - (Alan Paris) Initial release
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 
 MIT License
