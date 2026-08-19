@@ -153,21 +153,20 @@ class SkyRemoteAdapter extends utils.Adapter {
 
         // Create each button state
         for (const button of this.buttons) {
-            await this.setObjectNotExistsAsync(`buttons.${button}`, {
+            // extendObject (not setObjectNotExists) so existing installations get the
+            // corrected read flag on upgrade
+            await this.extendObjectAsync(`buttons.${button}`, {
                 type: 'state',
                 common: {
                     name: `Sky ${BUTTON_LABELS[button] || button}`,
                     type: 'boolean',
                     role: 'button',
-                    read: true,
+                    read: false,
                     write: true,
                     def: false,
                 },
                 native: {},
             });
-
-            // Initialize to false with ack
-            await this.setState(`buttons.${button}`, false, true);
         }
 
         // Create sequence state
@@ -311,13 +310,6 @@ class SkyRemoteAdapter extends utils.Adapter {
                 .catch(err => {
                     this.log.error(`Error sending command: ${err.message}`);
                     this.setState('info.connection', false, true);
-                })
-                .finally(() => {
-                    // Reset our own button state with ack after a short delay
-                    this.setTimeout(() => {
-                        this.log.debug(`Resetting button state: buttons.${command}`);
-                        this.setState(`buttons.${command}`, false, true);
-                    }, 200);
                 });
         } else if (id.endsWith('sendSequence') && typeof state.val === 'string' && state.val) {
             // Handle sequence

@@ -138,6 +138,9 @@ setState('sky-remote.0.sendSequence', 'power,1,0,1');
 	Placeholder for the next version (at the beginning of the line):
 	### __WORK IN PROGRESS__
 -->
+### __WORK IN PROGRESS__
+- (Alan Paris) Button states are now write-only (`read: false`) as required for the `button` role; existing installations are migrated on start
+
 ### 1.0.5 (2026-07-05)
 - (Alan Paris) Reset own button states via setState instead of setForeignState
 - (Alan Paris) Validate and clamp the port and connection-check-frequency config in code (not only in the admin UI)
