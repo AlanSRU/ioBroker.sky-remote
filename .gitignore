@@ -46,3 +46,6 @@ CLAUDE.md
 
 # ioBroker dev-server
 .dev-server/
+
+# Claude Code local settings
+.claude/
