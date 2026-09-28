@@ -1,0 +1,21 @@
+// Root tsconfig for type checking and editor support of the JS sources (nothing is compiled)
+{
+    // To update the target, install a different version of @tsconfig/node... and reference it here
+    // https://github.com/tsconfig/bases#node-22-tsconfigjson
+    "extends": "@tsconfig/node22/tsconfig.json",
+    "compilerOptions": {
+        "noEmit": true,
+
+        // check JS files, but do not compile them
+        "allowJs": true,
+        "checkJs": true,
+
+        // This is necessary for the automatic typing of the adapter config
+        "resolveJsonModule": true,
+
+        // @tsconfig/node22 limits "types" to node; add the test globals (ioBroker types come via adapter-core)
+        "types": ["node", "mocha"]
+    },
+    "include": ["main.js", "lib/**/*.js", "lib/**/*.d.ts", "test/**/*.js"],
+    "exclude": ["node_modules/**", ".dev-server/**"]
+}

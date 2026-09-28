@@ -7,6 +7,7 @@ const skyRemote = require('./lib/sky-remote');
 const SEQUENCE_DELAY_MS = 500;
 
 // Human-friendly labels for the button states (falls back to the raw command name).
+/** @type {Record<string, string>} */
 const BUTTON_LABELS = {
     power: 'Power',
     tvguide: 'TV Guide',
@@ -40,7 +41,7 @@ const BUTTON_LABELS = {
 
 class SkyRemoteAdapter extends utils.Adapter {
     /**
-     * @param {Partial<utils.AdapterOptions>} [options]
+     * @param {Partial<utils.AdapterOptions>} [options] adapter options (set by js-controller)
      */
     constructor(options) {
         super({
@@ -52,10 +53,12 @@ class SkyRemoteAdapter extends utils.Adapter {
         this.on('stateChange', this.onStateChange.bind(this));
         this.on('unload', this.onUnload.bind(this));
 
+        /** @type {boolean | null} */
         this.isConnected = null;
         this.connectionCheckInterval = null;
         this.checkSocket = null;
         this.unloaded = false;
+        this.skyHost = '';
 
         // All supported Sky Remote button commands
         this.buttons = [
@@ -110,9 +113,9 @@ class SkyRemoteAdapter extends utils.Adapter {
         // for values set via CLI or by editing the config directly)
         // Deliberately not this.host — the Adapter base class owns that (the ioBroker host name)
         this.skyHost = this.config.host || '';
-        const port = parseInt(this.config.port, 10);
+        const port = parseInt(String(this.config.port), 10);
         this.port = port >= 1 && port <= 65535 ? port : 49160;
-        const freq = parseInt(this.config.connectionCheckFrequency, 10) || 60000;
+        const freq = parseInt(String(this.config.connectionCheckFrequency), 10) || 60000;
         this.connectionCheckFrequency = Math.min(300000, Math.max(5000, freq));
 
         // Check if host is configured
@@ -193,7 +196,7 @@ class SkyRemoteAdapter extends utils.Adapter {
      * Every writer must go through here — a direct setState would desync the cache
      * and latch the state at a stale value.
      *
-     * @param {boolean} connected
+     * @param {boolean} connected whether the Sky box is currently reachable
      */
     setConnected(connected) {
         if (this.unloaded || this.isConnected === connected) {
@@ -283,8 +286,8 @@ class SkyRemoteAdapter extends utils.Adapter {
     /**
      * Is called if a subscribed state changes
      *
-     * @param {string} id
-     * @param {ioBroker.State | null | undefined} state
+     * @param {string} id full ID of the changed state
+     * @param {ioBroker.State | null | undefined} state new state value, or null/undefined if deleted
      */
     onStateChange(id, state) {
         // Skip if null or acknowledged
@@ -340,7 +343,7 @@ class SkyRemoteAdapter extends utils.Adapter {
     /**
      * Is called when adapter shuts down - callback has to be called under any circumstances!
      *
-     * @param {() => void} callback
+     * @param {() => void} callback must be called once cleanup is done
      */
     onUnload(callback) {
         try {
@@ -372,7 +375,7 @@ class SkyRemoteAdapter extends utils.Adapter {
 if (require.main !== module) {
     // Export the constructor in compact mode
     /**
-     * @param {Partial<utils.AdapterOptions>} [options]
+     * @param {Partial<utils.AdapterOptions>} [options] adapter options (set by js-controller)
      */
     module.exports = options => new SkyRemoteAdapter(options);
 } else {
