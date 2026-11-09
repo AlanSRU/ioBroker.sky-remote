@@ -140,8 +140,7 @@ setState('sky-remote.0.sendSequence', 'power,1,0,1');
 	Placeholder for the next version (at the beginning of the line):
 	### __WORK IN PROGRESS__
 -->
-
-### **WORK IN PROGRESS**
+### 1.0.7 (2026-11-09)
 - (ioBroker-Bot) Adapter requires admin >= 7.8.23 now.
 - (Alan Paris) Corrected admin and changelog translations that used the wrong sense of "box", translated the brand name Sky as "sky", or inverted the meaning of write-only
 - (Alan Paris) README now states the minimum Node.js and js-controller versions
@@ -166,12 +165,6 @@ setState('sky-remote.0.sendSequence', 'power,1,0,1');
 
 ### 1.0.3 (2026-07-04)
 - (Alan Paris) Verified automated release publishing via GitHub Actions trusted publishing (no functional changes)
-
-### 1.0.2 (2026-07-04)
-- (Alan Paris) Modernized adapter for community submission: jsonConfig admin UI, updated dependencies, CI/release tooling
-
-### 1.0.0 (2025-05-05)
-- (Alan Paris) Initial release
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 

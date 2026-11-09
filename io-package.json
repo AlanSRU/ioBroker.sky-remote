@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "sky-remote",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "news": {
-      "NEXT": {
+      "1.0.7": {
         "en": "Adapter requires admin >= 7.8.23 now.\nCorrected admin and changelog translations that used the wrong sense of \"box\", translated the brand name Sky as \"sky\", or inverted the meaning of write-only\nREADME now states the minimum Node.js and js-controller versions",
         "de": "Der Adapter benötigt jetzt admin >= 7.8.23.\nAdmin- und Changelog-Übersetzungen korrigiert, die „Box“ im falschen Sinn verwendeten, den Markennamen Sky als „Himmel“ übersetzten oder die Bedeutung von „nur beschreibbar“ umkehrten\nDie README nennt jetzt die Mindestversionen von Node.js und js-controller",
         "ru": "Теперь адаптеру требуется admin >= 7.8.23.\nИсправлены переводы настроек и списка изменений, в которых слово «box» понималось в неверном значении, название бренда Sky переводилось как «небо» или смысл «только для записи» был изменён на противоположный\nВ README теперь указаны минимальные версии Node.js и js-controller",
