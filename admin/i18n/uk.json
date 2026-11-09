@@ -1,9 +1,9 @@
 {
     "Connection Check Frequency (ms)": "Частота перевірки підключення (мс)",
-    "How often to check if the Sky box is online (in milliseconds)": "Як часто перевіряти, чи Sky box онлайн (у мілісекундах)",
+    "How often to check if the Sky box is online (in milliseconds)": "Як часто перевіряти, чи приставка Sky у мережі (у мілісекундах)",
     "IP Address or Hostname": "IP-адреса або ім’я хосту",
-    "IP address of your Sky Q box": "IP-адреса вашого Sky Q box",
+    "IP address of your Sky Q box": "IP-адреса вашої приставки Sky Q",
     "Port": "Порт",
-    "Sky Box Settings": "Налаштування Sky Box",
-    "Usually 49160 for Sky Q boxes": "Зазвичай 49160 для коробок Sky Q"
+    "Sky Box Settings": "Налаштування приставки Sky",
+    "Usually 49160 for Sky Q boxes": "Зазвичай 49160 для приставок Sky Q"
 }
